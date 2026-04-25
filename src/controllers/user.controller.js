@@ -47,6 +47,21 @@ class UserController {
       });
     }
   }
+
+  static async feedUsers(req, res) {
+    try {
+      const userData = req.user;
+      const page = parseInt(req.query.page) || 1;
+      let limit = parseInt(req.query.limit) || 10;
+      limit = limit > 50 ? 50 : limit; // Set a maximum limit of 50
+
+      const uresList = await UserService.feedUsers(userData, page, limit);
+
+      res.json({ users: uresList });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = UserController;

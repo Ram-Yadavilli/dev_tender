@@ -16,4 +16,6 @@ userRouter.get(
   UserController.getAllConnections,
 );
 
+userRouter.get("/user/feedUsers", userAuth, UserController.feedUsers);
+
 module.exports = userRouter;
