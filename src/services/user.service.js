@@ -7,7 +7,10 @@ class UserService {
         receiverId: userData._id,
         status: "liked",
       })
-      .populate("senderId", "firstName lastName age bio skills photoUrl");
+      .populate(
+        "senderId",
+        "firstName lastName age bio skills photoUrl gender",
+      );
     return requests;
   }
 
@@ -19,8 +22,11 @@ class UserService {
           { senderId: userData._id, status: "accepted" },
         ],
       })
-      .populate("senderId", "firstName lastName age bio skills photoUrl")
-      .populate("receiverId", "firstName lastName age bio skills photoUrl");
+      .populate("senderId", "firstName lastName age bio skills photoUrl gender")
+      .populate(
+        "receiverId",
+        "firstName lastName age bio skills photoUrl gender",
+      );
 
     return requests;
   }

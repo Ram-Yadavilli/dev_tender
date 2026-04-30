@@ -4,6 +4,8 @@ class AuthService {
   static async signup(data, passwordHash) {
     const user = new User({ ...data, password: passwordHash });
     await user.save();
+    const token = await user.getJWT();
+    return { user, token };
   }
 
   static async login(emailId, password) {
